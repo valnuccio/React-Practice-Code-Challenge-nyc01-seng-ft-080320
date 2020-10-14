@@ -16,94 +16,49 @@ class App extends Component {
     addMoney:false,
   }
 
-  // emptyPlater = (sushiObj) => {
+  emptyPlater = (sushiObj) => {
 
-  //   if(sushiObj.sushi.price <= this.state.budget){
-  //       let newArray=[...this.state.eatenArray, sushiObj]
+    if(sushiObj.sushi.price <= this.state.budget){
+        let newArray=[...this.state.eatenArray, sushiObj]
         
-  //       let newBudget= this.state.budget - sushiObj.sushi.price
+        let newBudget= this.state.budget - sushiObj.sushi.price
 
-  //       let sushiId= sushiObj.sushi.id
+        let sushiId= sushiObj.sushi.id
 
-  //       let passedValue={eaten: true}
+        let passedValue={eaten: true}
 
-  //       let options={
-  //         method:'PATCH',
-  //         headers:{
-  //           'content-type':'application/json',
-  //           'accepts':'application/json'
-  //         },
-  //         body:JSON.stringify({passedValue})
-  //       }
+        let options={
+          method:'PATCH',
+          headers:{
+            'content-type':'application/json',
+            'accepts':'application/json'
+          },
+          body:JSON.stringify({passedValue})
+        }
 
-  //       fetch(API+sushiId, options)
-  //       .then(res=>res.json())
-  //       .then(data=>{
-  //         fetch(API)
-  //         .then(res=>res.json())
-  //         .then(data=>this.setState({api:data,eatenArray:newArray, budget:newBudget }))
-  //       })
+        fetch(API+sushiId, options)
+        .then(res=>res.json())
+        .then(data=>{
+          fetch(API)
+          .then(res=>res.json())
+          .then(data=>this.setState({api:data,eatenArray:newArray, budget:newBudget }))
+        })
 
 
-  //       // this.setState({numEaten: this.state.numEaten+1})
-  //   }
-  // }
+        // this.setState({numEaten: this.state.numEaten+1})
+    }
+  }
 
   componentDidMount() {
     fetch(API)
     .then(res=>res.json())
-    .then(data=>this.patchIt())
+    .then(data=>console.log(data))
   }
-
-  patchIt = () =>{
-
-    let passedValue={eaten:false}
-     let options={
-          method:'PATCH',
-          headers:{
-            'content-type':'application/json',
-            'accept':'application/json'
-          },
-          body: JSON.stringify(passedValue)
-          }
-
-    fetch(API, options)
-    .then(res=>res.json())
-    .then(data=>this.reFetchIt())
-
-  }
-
-  reFetchIt =() =>{
-    fetch(API)
-    .then(res=>res.json())
-    .then(data=>this.setState({api:data}))
-  }
-
-      // fetch(API)
-      // .then(res=>res.json())
-  //     .then(data=>()=>{ 
-  //           let passedValue={eaten:false}
-  //           let options={
-  //             method:'PATCH',
-  //             headers:{
-  //               'content-type':'application/json',
-  //               'accept':'application/json'
-  //             },
-  //             body: JSON.stringify(passedValue)
-  //              }
-
-  //   fetch(API, options)
-  //   .then(res=>res.json())
-  //   .then(data=>()=>{
-  //     fetch(API)
-  //     .then(res=>res.json())
-  //     .then(data=>this.setState({api:data}))
-  //   })
-  // })
-    
   
-  // })}
 
+  
+
+  
 
   addThatForm =() =>{
     this.setState({addMoney:true})
